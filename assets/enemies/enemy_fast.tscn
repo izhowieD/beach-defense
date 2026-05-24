@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bnpey4ljvegms"]
+
+[ext_resource type="Script" uid="uid://6vaoh8m8ifi3" path="res://scripts/Enemy.gd" id="1_enemy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fast"]
+resource_local_to_scene = true
+albedo_color = Color(0.85, 0.12, 0.1, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_wdrd1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fast"]
+radius = 0.38
+height = 1.18
+
+[node name="enemy_fast" type="Area3D" unique_id=1467917113]
+script = ExtResource("1_enemy")
+move_speed = 7.2
+contact_radius = 1.15
+
+[node name="enemy_mesh" type="MeshInstance3D" parent="." unique_id=489087582]
+material_override = SubResource("StandardMaterial3D_fast")
+mesh = SubResource("PrismMesh_wdrd1")
+
+[node name="enemy_collision" type="CollisionShape3D" parent="." unique_id=2021653331]
+shape = SubResource("CapsuleShape3D_fast")

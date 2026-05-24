@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/Turret.gd" id="1_turret"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_base"]
+albedo_color = Color(0.18, 0.22, 0.24, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_head"]
+albedo_color = Color(0.33, 0.37, 0.38, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_barrel"]
+albedo_color = Color(0.08, 0.09, 0.09, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_base"]
+top_radius = 1.25
+bottom_radius = 1.55
+height = 0.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_head"]
+size = Vector3(1.9, 1.2, 1.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_barrel"]
+top_radius = 0.18
+bottom_radius = 0.27
+height = 4.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hurtbox"]
+radius = 1.35
+
+[node name="turret_player" type="Node3D"]
+script = ExtResource("1_turret")
+max_yaw_degrees = 60.0
+min_pitch_degrees = -90.0
+max_pitch_degrees = 0.0
+fire_interval = 0.28
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+mesh = SubResource("CylinderMesh_base")
+material_override = SubResource("StandardMaterial3D_base")
+
+[node name="RotatingHead" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+mesh = SubResource("BoxMesh_head")
+material_override = SubResource("StandardMaterial3D_head")
+
+[node name="BarrelPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, -0.75)
+
+[node name="Barrel" type="MeshInstance3D" parent="BarrelPivot"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -2.1)
+mesh = SubResource("CylinderMesh_barrel")
+material_override = SubResource("StandardMaterial3D_barrel")
+
+[node name="Muzzle" type="Node3D" parent="BarrelPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.35)
+
+[node name="CameraPitchPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, -0.75)
+
+[node name="AimCamera" type="Camera3D" parent="CameraPitchPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0, 2, 6.2)
+current = true
+fov = 68.0
+
+[node name="Hurtbox" type="Area3D" parent="."]
+groups = ["turret"]
+
+[node name="turret_collision" type="CollisionShape3D" parent="Hurtbox"]
+shape = SubResource("SphereShape3D_hurtbox")

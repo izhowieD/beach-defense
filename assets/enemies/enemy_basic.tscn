@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://ybqi2ayobmh7"]
+
+[ext_resource type="Script" uid="uid://6vaoh8m8ifi3" path="res://scripts/Enemy.gd" id="1_enemy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_basic"]
+resource_local_to_scene = true
+albedo_color = Color(0.85, 0.12, 0.1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_basic"]
+radius = 0.42
+height = 1.25
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_basic"]
+radius = 0.42
+height = 1.25
+
+[node name="enemy_basic" type="Area3D" unique_id=2145086435]
+script = ExtResource("1_enemy")
+contact_radius = 1.2
+
+[node name="enemy_mesh" type="MeshInstance3D" parent="." unique_id=1597098123]
+material_override = SubResource("StandardMaterial3D_basic")
+mesh = SubResource("CapsuleMesh_basic")
+
+[node name="enemy_collision" type="CollisionShape3D" parent="." unique_id=1726508459]
+shape = SubResource("CapsuleShape3D_basic")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/FanGround.gd" id="1_ground"]
+
+[node name="outside_battlefield" type="MeshInstance3D"]
+script = ExtResource("1_ground")
+radius = 86.0
+angle_degrees = 132.0
+segments = 64
+center_offset_z = -3.0

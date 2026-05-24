@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wall"]
+albedo_color = Color(0.42, 0.4, 0.36, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_top"]
+albedo_color = Color(0.34, 0.34, 0.31, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall"]
+size = Vector3(76, 24, 8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_top"]
+size = Vector3(76, 0.35, 8.4)
+
+[node name="castle_wall" type="Node3D"]
+
+[node name="wall_body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 1)
+mesh = SubResource("BoxMesh_wall")
+material_override = SubResource("StandardMaterial3D_wall")
+
+[node name="wall_top" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.18, 1)
+mesh = SubResource("BoxMesh_top")
+material_override = SubResource("StandardMaterial3D_top")
